@@ -23,9 +23,7 @@ export const StyledApp = styled.div`
     background: rgba(0,0,0,.75);
 
     .header-left {
-
-
-      .h1-header {
+      .header-brand {
         margin-top: 0;
         margin-bottom: 0;
         font-weight: 500;
@@ -50,10 +48,19 @@ export const StyledApp = styled.div`
     bottom: 40px;
     left: 0;
     right: 0;
-    background: rgba(255,0,0,.7);
+    // background-color: rgba(255,0,0,.7);
+    background-repeat: no-repeat;
+    background-position: right top;
+    background-size: cover;
 
     .game-container {
-      
+      padding: 16px 32px;
+
+      .top-stats-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
     }
   }
 

@@ -1,33 +1,31 @@
 import React from 'react';
 import './App.css';
 import { StyledApp } from './styles/app-layout.style';
+import { InventoryButton } from './components/buttons'
+import { PageHeader } from './components/layout'
+import { GoldText } from './components/typography'
 
 function App() {
+
+  const handleInventoryClick = () => {
+    console.log('inventory button clicked')
+    // toggle inventory (modal?)
+  }
+
   return (
     <StyledApp className="app-container">
-      <header>
-        {/* Left Side */}
-        <div className="header-left">
-          <h1 className="h1-header">Runescape Sim</h1>
-        </div>
-        {/* Right Side */}
-        <div className="header-right">
-          <h3>DarthBitcoin</h3>
-        </div>
-      </header>
-      <main>
+      <PageHeader />
+      <main  style={{backgroundImage:"url('/res/game-background.jpeg')"}}>
         <div className="game-container">
           {/* Top Stats Bar */}
           <section className="top-stats-bar">
             {/* Left Side */}
-            <div className="inventory-btn-container">
-              <button className="inventory-btn">Inventory</button>
-            </div>
+            <InventoryButton handleClick={handleInventoryClick} />
             {/* Right Side */}
-            <div className="gold-container">
-              <span className="gold-text">0</span>
-            </div>
+            <GoldText />
           </section>
+
+          {/* Dialogue Box */}
         </div>
       </main>
       <footer>
