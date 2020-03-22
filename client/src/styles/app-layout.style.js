@@ -61,6 +61,10 @@ export const StyledApp = styled.div`
         justify-content: space-between;
         align-items: center;
       }
+
+      .action-buttons {
+        margin-top: 8%;
+      }
     }
   }
 
