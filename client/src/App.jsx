@@ -1,14 +1,19 @@
 import React from 'react';
 import './App.css';
+import { StyledApp } from './styles/app-layout.style';
 
 function App() {
   return (
-    <div className="app-container">
+    <StyledApp className="app-container">
       <header>
         {/* Left Side */}
-        <h1>Runescape Sim</h1>
+        <div className="header-left">
+          <h1 className="h1-header">Runescape Sim</h1>
+        </div>
         {/* Right Side */}
-        <h3>DarthBitcoin</h3>
+        <div className="header-right">
+          <h3>DarthBitcoin</h3>
+        </div>
       </header>
       <main>
         <div className="game-container">
@@ -28,7 +33,7 @@ function App() {
       <footer>
         <p className="footer-text">Made by Nico and Eric during the Great Coronavirus Lockdown of 2020</p>
       </footer>
-    </div>
+    </StyledApp>
   );
 }
 
