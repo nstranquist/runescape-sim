@@ -7,7 +7,7 @@ const StyledHeader = styled.header`
 
 export const PageHeader = () => {
   return (
-    <StyledHeader>
+    <StyledHeader className="page-header">
       {/* Left Side */}
       <div className="header-left">
         <h1 className="header-brand">Runescape Sim</h1>

@@ -9,7 +9,7 @@ export const StyledApp = styled.div`
   overflow-y: hidden;
   line-height: 1.25;
 
-  header {
+  header.page-header {
     position: absolute;
     top: 0;
     left: 0;
@@ -52,20 +52,24 @@ export const StyledApp = styled.div`
     background-repeat: no-repeat;
     background-position: right top;
     background-size: cover;
-
-    .game-container {
-      padding: 16px 32px;
+    padding: 16px 32px;
 
       .top-stats-bar {
+        margin-top: 2%;
+        margin-left: 4%;
+        margin-right: 4%;
         display: flex;
         justify-content: space-between;
         align-items: center;
       }
 
       .action-buttons {
-        margin-top: 8%;
+        margin-top: 6%;
       }
-    }
+
+      .dialogue-box {
+        margin-top: 4%;
+      }
   }
 
   footer {
@@ -85,6 +89,13 @@ export const StyledApp = styled.div`
       opacity: .75;
       margin-bottom: 0;
       margin-top: 0;
+    }
+  }
+
+  @media(min-width: 1200px) {
+    main .top-stats-bar {
+      margin-left: 8%;
+      margin-right: 8%;
     }
   }
 `

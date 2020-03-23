@@ -2,10 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 
 const StyledActionButtons = styled.div`
-  width: 100%;
+  width: 92%;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  margin-left: 4%;
+  margin-right: 4%;
 
   .action-btn {
     flex: 1;
@@ -15,6 +17,8 @@ const StyledActionButtons = styled.div`
     margin-left: 4%;
     margin-right: 4%;
     padding: 3%;
+    max-height: 20vh;
+    max-width: 30vh;
     border: none;
     outline: none;
     border: 1px solid rgba(0,0,0,.2);
@@ -36,6 +40,12 @@ const StyledActionButtons = styled.div`
       width: 12vh;
       height: 12vh;
     }
+  }
+
+  @media (min-width: 1200px) {
+    width: initial;
+    padding-left: 5%;
+    padding-right: 5%;
   }
 `
 

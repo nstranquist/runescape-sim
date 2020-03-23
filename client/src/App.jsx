@@ -4,6 +4,7 @@ import { InventoryButton } from './components/core/buttons'
 import { PageHeader } from './components/core/layout'
 import { GoldText } from './components/core/typography'
 import { ActionButtons } from './components/ActionButtons'
+import { DialogueBox } from './components/DialogueBox'
 // import styles
 import { StyledApp } from './styles/app-layout.style';
 import './App.css';
@@ -31,7 +32,7 @@ function App() {
     <StyledApp className="app-container">
       <PageHeader />
       <main  style={{backgroundImage:"url('/res/game-background.jpeg')"}}>
-        <div className="game-container">
+        {/* <div className="game-container"> */}
           {/* Top Stats Bar */}
           <section className="top-stats-bar">
             {/* Left Side */}
@@ -51,9 +52,9 @@ function App() {
 
           {/* Dialogue Box */}
           <section className="dialogue-box">
-            dialogue box
+            <DialogueBox />
           </section>
-        </div>
+        {/* </div> */}
       </main>
       <footer>
         <p className="footer-text">Made by Nico and Eric during the Great Coronavirus Lockdown of 2020</p>
