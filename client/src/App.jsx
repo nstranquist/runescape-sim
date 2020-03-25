@@ -56,7 +56,7 @@ function App() {
     createNewMessage(message)
   }
 
-  const createNewMessage = (message, type="Game") => {
+  const createNewMessage = (message, type="Game", sender=null) => {
     console.log('new message:', message)
     let timestamp=null;
     if(type==='Game' || type==='Social') {
@@ -68,14 +68,14 @@ function App() {
         id: uuidv4(),
         title: message,
         timestamp,
-        type
+        type,
+        sender
       }
     ])
   }
 
-  const handleSendUserMessage = (messageInput) => {
-    let message = `(darthbitcoin): ${messageInput}`
-    createNewMessage(message, "Social")
+  const handleSendUserMessage = (messageText) => {
+    createNewMessage(messageText, "Social", "darthbitcoin")
   }
 
   const hideDialogueBox = () => setDialogueVisible(false)
