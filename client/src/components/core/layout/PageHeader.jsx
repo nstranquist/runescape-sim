@@ -5,7 +5,9 @@ const StyledHeader = styled.header`
 
 `
 
-export const PageHeader = () => {
+export const PageHeader = ({
+  playerName
+}) => {
   return (
     <StyledHeader className="page-header">
       {/* Left Side */}
@@ -14,7 +16,7 @@ export const PageHeader = () => {
       </div>
       {/* Right Side */}
       <div className="header-right">
-        <h3 className="header-player-name">DarthBitcoin</h3>
+        <h3 className="header-player-name">{playerName}</h3>
       </div>
     </StyledHeader>
   )

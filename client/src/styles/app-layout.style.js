@@ -9,6 +9,21 @@ export const StyledApp = styled.div`
   overflow-y: hidden;
   line-height: 1.25;
 
+  section.inventory-section {
+    position: absolute;
+    left: 15vw;
+    right: 15vw;
+    top: 15vh;
+    bottom:15vh;
+    background: rgba(0,0,0,.75);
+    color: #fff;
+    z-index: 1001;
+
+    header.inventory-header {
+      text-align: center;
+    }
+  }
+
   header.page-header {
     position: absolute;
     top: 0;
