@@ -203,9 +203,6 @@ export const Game = ({
           {/* Right Side */}
           <StatusBar
             goldNumber={player.gold}
-            fishingSkill={skills.fishingXp}
-            woodcuttingSkill={skills.woodcuttingXp}
-            miningSkill={skills.miningXp}
           />
         </section>
 

@@ -1,5 +1,7 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import styled from 'styled-components'
+// import components
 import { GoldText, SkillText } from '../core/typography'
 
 const StyledStatusBar = styled.div`
@@ -36,9 +38,11 @@ const StyledStatusBar = styled.div`
 
 export const StatusBar = ({
   goldNumber,
-  fishingXp, // { level: 0, xp: 0 }
-  woodcuttingXp,
-  miningXp
+  skills: {
+    fishingXp,
+    woodcuttingXp,
+    miningXp
+  }
 }) => {
   return (
     <StyledStatusBar>
@@ -48,17 +52,26 @@ export const StatusBar = ({
       <div className="bottom-row">
         <SkillText
           type="fishing"
-          level={fishingXp}
+          text={fishingXp}
         />
         <SkillText
           type="woodcutting"
-          level={woodcuttingXp}
+          text={woodcuttingXp}
         />
         <SkillText
           type="mining"
-          level={miningXp}
+          text={miningXp}
         />
       </div>
     </StyledStatusBar>
   )
 }
+
+const mapStateToProps = (state) => ({
+  skills: state.skills
+})
+
+export const ConnectedStatusBar = connect(
+  mapStateToProps,
+  {  }
+)(StatusBar)

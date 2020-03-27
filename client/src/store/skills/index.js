@@ -46,17 +46,17 @@ export default (
     case ADD_FISHING_XP:
       return {
         ...state,
-        fishingXp: action.fishingXp
+        fishingXp: state.fishingXp + action.xp
       }
     case ADD_WOODCUTTING_XP:
       return {
         ...state,
-        woodcuttingXp: action.woodcuttingXp
+        woodcuttingXp: state.woodcuttingXp + action.xp
       }
     case ADD_MINING_XP:
       return {
         ...state,
-        miningXp: action.miningXp
+        miningXp: state.miningXp + action.xp
       }
     default:
       return state

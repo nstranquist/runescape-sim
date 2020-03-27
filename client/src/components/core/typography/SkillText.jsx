@@ -18,7 +18,7 @@ const StyledSkillText = styled.div`
 
 export const SkillText = ({
   type,
-  level=0
+  text=0
 }) => {
 
   const getSourceFromType = () => {
@@ -35,7 +35,7 @@ export const SkillText = ({
   return (
     <StyledSkillText>
       <img src={getSourceFromType()} alt="a skill type" className="skill-text-img" />
-      <p className="skill-text">{level}</p>
+      <p className="skill-text">{text}</p>
     </StyledSkillText>
   )
 }

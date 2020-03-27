@@ -12,12 +12,9 @@ const StyledGoldText = styled.div`
   }
 
   .gold-text {
-    // font-size: 18px;
-    // line-height: 1.25;
-    // padding-top: 12px;
-    // font-size: 18px;
     margin-top: 0; margin-bottom: 0px;
     padding-top: 6px; padding-bottom: 6px;
+    overflow-x: auto;
   }
 `
 

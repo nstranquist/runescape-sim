@@ -1,5 +1,5 @@
-import { StatusBar } from './StatusBar'
+import { ConnectedStatusBar } from './StatusBar'
 
 export {
-  StatusBar
+  ConnectedStatusBar as StatusBar
 }
