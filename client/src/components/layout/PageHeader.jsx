@@ -1,8 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 const StyledHeader = styled.header`
+  .header-player-name {
+    color: #fff;
+    opacity: .82;
+    text-decoration: none;
 
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 `
 
 export const PageHeader = ({
@@ -16,7 +25,9 @@ export const PageHeader = ({
       </div>
       {/* Right Side */}
       <div className="header-right">
-        <h3 className="header-player-name">{playerName}</h3>
+        <Link to="/profile">
+          <h3 className="header-player-name">{playerName}</h3>
+        </Link>
       </div>
     </StyledHeader>
   )

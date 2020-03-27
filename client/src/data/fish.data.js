@@ -89,7 +89,7 @@ export const getRandomFish = () => {
   return fishData[random]
 }
 
-export const getRandomFishName = () => {
-  let random = Math.floor(Math.random() * fishNamesData.length)
-  return fishNamesData[random]
-}
+// export const getRandomFishName = () => {
+//   let random = Math.floor(Math.random() * fishNamesData.length)
+//   return fishNamesData[random]
+// }
