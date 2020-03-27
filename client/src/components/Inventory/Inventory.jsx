@@ -1,7 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
+// components
 import { InventoryButtonBar, InventoryItem, EmptyInventoryItem } from './index'
 import { StyledInventory } from './inventory.style'
+// redux
+import { increaseInventorySize } from '../../store/inventory'
 
 
 export const InventoryUI = ({
@@ -10,11 +13,11 @@ export const InventoryUI = ({
   handleSellAll,
   handleDeleteItem,
   handleCloseInventory,
+  increaseInventorySize,
 }) => {
 
   const renderInventoryItems = () => {
     let resultItems = []
-    console.log('inventory size is:', inventory.size)
     for(let count=0; count<inventory.size; count++) {
       // create the inventory slot
       if(inventory.items[count]) {
@@ -36,6 +39,12 @@ export const InventoryUI = ({
     return resultItems
   }
 
+  const handleAddSize = () => {
+    // increase inventory size
+    increaseInventorySize()
+
+  }
+
   return (
     <StyledInventory className="inventory-container">
 
@@ -45,7 +54,11 @@ export const InventoryUI = ({
           <h1 className="top-header-h1">Your Inventory</h1>
           <div className="close-inventory" onClick={handleCloseInventory}>Close X</div>
         </div>
-        <h5>size: {inventory.size}</h5>
+        <h5>
+          size: {inventory.size}
+          <span style={{display:'inline-block',padding:5,lineHeight:1,fontSize:"16px",marginLeft:4,background:"rgb(200,200,200)",color:"#000",cursor:'pointer',}}
+            onClick={handleAddSize}>+</span>
+        </h5>
       </header>
 
       {/* Inventory Items */}
@@ -69,4 +82,5 @@ const mapStateToProps = (state) => ({
 
 export const Inventory = connect(
   mapStateToProps,
+  { increaseInventorySize }
 )(InventoryUI)

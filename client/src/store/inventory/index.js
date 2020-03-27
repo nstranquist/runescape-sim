@@ -8,7 +8,6 @@ const INCREMENT_ITEM_QUANTITY = 'INCREMENT_ITEM_QUANTITY'
 const DECREMENT_ITEM_QUANTITY = 'DECREMENT_ITEM_QUANTITY'
 
 const INCREASE_SIZE = 'INCREASE_SIZE'
-const DECREASE_SIZE = 'DECREASE_SIZE'
 
 // action creators
 export const addInventoryItem = (item) => ({
@@ -29,11 +28,8 @@ export const decrementInventoryItem = (itemName) => ({
 })
 
 
-export const increaseSize = () => ({
+export const increaseInventorySize = () => ({
   type: INCREASE_SIZE
-})
-export const decreaseSize = () => ({
-  type: DECREASE_SIZE
 })
 
 
@@ -103,11 +99,6 @@ export default (
       return {
         ...state,
         size: state.size + 1
-      }
-    case DECREASE_SIZE: 
-      return {
-        ...state,
-        size: state.size - 1
       }
     default:
       return state;

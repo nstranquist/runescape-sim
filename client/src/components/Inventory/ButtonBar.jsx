@@ -9,11 +9,11 @@ const StyledButtonBar = styled.div`
   text-align: center;
   display: flex;
   justify-content: space-evenly;
-  // margin-top: 33px;
-  margin-bottom: 33px;
+  align-items: center;
+  height: 8vh;
 
-  padding-left: 15%;
-  padding-right: 15%;
+  // padding-left: 15%;
+  // padding-right: 15%;
 
   .button-bar-btn {
     padding: 12px 16px;

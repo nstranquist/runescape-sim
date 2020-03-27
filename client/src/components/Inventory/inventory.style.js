@@ -6,6 +6,8 @@ export const StyledInventory = styled.div`
   right: 15vw;
   top: 15vh;
   bottom: 15vh;
+  height: 70vh;
+  width: 70vw;
   background: rgba(0,0,0,.75);
   color: #fff;
   z-index: 1001;
@@ -14,6 +16,8 @@ export const StyledInventory = styled.div`
     text-align: center;
 
     .top-header {
+      // height: 10vh;
+
       h1.top-header-h1 {
         margin-top: 0;
         margin-bottom: 12px;
@@ -47,12 +51,12 @@ export const StyledInventory = styled.div`
   }
   .inventory-items-inner {
     margin: 0 auto;
-    max-width: 690px;
+    max-width: 710px;
+    max-height: calc(70vh - 8vh - 26px - 64px);
     display: grid;
     grid-column-gap: 15px;
     grid-row-gap: 20px;
     grid-template-columns: repeat(6, 100px);
-    // grid-template-rows:
-
+    overflow-y: auto;
   }
 `
