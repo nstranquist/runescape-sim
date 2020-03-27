@@ -2,31 +2,22 @@ import React from 'react'
 import styled from 'styled-components'
 
 const StyledGoldText = styled.div`
-  
+  font-size: 18px;
+  line-height: 1.25;
+
+  .gold-icon {
+    width: 28px;
+    height: 28px;
+    float: left;
+  }
 
   .gold-text {
-    align-items: center;
-    font-size: 24px;
-    line-height: 1.25;
-    margin-top: 0;
-    margin-bottom: 0;
-
-    .gold-icon {
-      float: left;
-      width: 33px;
-      height: 33px;
-      line-height: 1.25;
-      margin-right: 2px;
-      margin-top: 1px;
-    }
-
-    .gold-text-number {
-      font-size: 28px;
-      line-height: 1.25;
-      display: inline-block;
-      padding-top: 12px;
-      font-size: 18px;
-    }
+    // font-size: 18px;
+    // line-height: 1.25;
+    // padding-top: 12px;
+    // font-size: 18px;
+    margin-top: 0; margin-bottom: 0px;
+    padding-top: 6px; padding-bottom: 6px;
   }
 `
 
@@ -36,9 +27,8 @@ export const GoldText = ({
   return (
     <StyledGoldText className="gold-text-container">
       <p className="gold-text">
-        {/* TODO: replace with icon */}
         <img src="/res/coins.svg" alt="Gold" className="gold-icon" />
-        <span className="gold-text-number"> {goldNumber}</span>
+        {goldNumber}
       </p>
     </StyledGoldText>
   )

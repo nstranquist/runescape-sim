@@ -182,7 +182,6 @@ export const Game = ({
 
   return (
     <>
-
       {activeScreen === 'Inventory' && (
         <Inventory
           handleSellItem={handleSellItem}

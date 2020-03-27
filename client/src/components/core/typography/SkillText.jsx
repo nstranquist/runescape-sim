@@ -9,6 +9,11 @@ const StyledSkillText = styled.div`
     height: 28px;
     width: 28px;
   }
+  .skill-text {
+    margin-top: 0; margin-bottom: 0;
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
 `
 
 export const SkillText = ({
@@ -30,7 +35,7 @@ export const SkillText = ({
   return (
     <StyledSkillText>
       <img src={getSourceFromType()} alt="a skill type" className="skill-text-img" />
-      <p>{level}</p>
+      <p className="skill-text">{level}</p>
     </StyledSkillText>
   )
 }
