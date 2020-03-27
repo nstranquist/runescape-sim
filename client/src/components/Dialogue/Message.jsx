@@ -6,7 +6,7 @@ export const DialogueMessage = ({
   message
 }) => {
   return (
-    <StyledDialogueItem className="dialogue-item">
+    <StyledDialogueItem className={message.type === 'Error' ? "dialogue-item red-text" : "dialogue-item"}>
       {message.timestamp && (
         <span className="message-timestamp">{formatMessageTimestamp(message.timestamp)}</span>
       )}

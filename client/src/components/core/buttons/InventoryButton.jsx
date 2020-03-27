@@ -15,6 +15,8 @@ const StyledInventoryButton = styled.div`
 `
 
 export const InventoryButton = ({
+  numberOfItems,
+  maxItems,
   handleClick
 }) => {
   return (
@@ -22,6 +24,7 @@ export const InventoryButton = ({
       onClick={handleClick}>
       <div className="inventory-btn-inner">
         Inventory
+        <span> ({numberOfItems < maxItems ? numberOfItems : "MAX"}) </span>
       </div>
     </StyledInventoryButton>
   )

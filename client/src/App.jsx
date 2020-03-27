@@ -1,17 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 // import components
 import { ActionButtons } from './components/ActionButtons'
 import { Dialogue } from './components/Dialogue'
-import { Inventory } from './components/Inventory'
+import { Inventory, InventoryButtonBar } from './components/Inventory'
 import { InventoryButton } from './components/core/buttons'
-import { PageHeader } from './components/core/layout'
-import { GoldText } from './components/core/typography'
+import { PageHeader } from './components/layout'
+import { StatusBar } from './components/StatusBar';
 // import utils
 import { getRandomFish } from './data/fish.data'
 import { getRandomWood } from './data/wood.data'
 import { getRandomOre } from './data/ores.data'
 import { newFormattedTimestamp } from './utils/timestamp.utils'
+// import redux
+import {
+  addInventoryItem, removeInventoryItem, decrementInventoryItem, incrementInventoryItem
+} from './store/inventory'
+import { addXp } from './store/skills'
+import { addGold, removeGold } from './store/player'
 // import styles
 import { StyledApp } from './styles/app-layout.style';
 import './App.css';
@@ -31,92 +38,109 @@ const starterMessages = [
   }
 ]
 
-const startingPlayerData = {
-  playerName: "darthbitcoin",
-  gold: 0,
-  fishing: {
-    level: 0,
-    xp: 0,
-  },
-  woodcutting: {
-    level: 0,
-    xp: 0
-  },
-  mining: {
-    level: 0,
-    xp: 0
-  },
-  inventory: {
-    size: 24,
-    items: [
-      {
-        id: uuidv4(),
-        name: 'Tuna',
-        sellValue: 12,
-        stackable: true,
-        quantity: 11,
-      },
-      {
-        id: uuidv4(),
-        name: 'Bronze Sword',
-        sellValue: 40,
-        stackable: false,
-        // no quantity provided if stackable=false
-      }
-    ]
-  }
-}
-
-
 // TODO: color-code the timestamp (green or maroon), name (blue?), message text (white)
+function App({
+  player,
+  inventory,
+  skills,
+  addGold, removeGold,
+  addXp,
+  addInventoryItem, removeInventoryItem,
+  incrementInventoryItem,
+  decrementInventoryItem,
 
-function App() {
-  const [playerData, setPlayerData] = useState(startingPlayerData)
+}) {
+  // const [playerData, setPlayerData] = useState(startingPlayerData)
   const [messages, setMessages] = useState(starterMessages)
   const [dialogueVisible, setDialogueVisible] = useState(true)
   const [activeScreen, setActiveScreen] = useState('Home') // 'Inventory', 'Exchange', etc. (react-router / lazy load??)
 
+  useEffect(() => {
+    console.log('-----------inventory items change:', inventory.items)
+  }, [inventory.items])
+
   const handleInventoryClick = () => {
-    console.log('inventory button clicked')
-    // toggle inventory (modal?)
     setActiveScreen('Inventory')
   }
 
   const onHandleFish = () => {
     let fish = getRandomFish()
-    console.log('fish:', fish)
     let message = `You caught a ${fish.name}`
-    addInventoryItem({
-      ...fish
-    })
-    createNewMessage(message)
+    handleAddXp('fishing', fish.xp)
+    // check if fish is in inventory
+    let match = inventory.items.find(item => item.name === fish.name)
+    // if it is, and quantity < 99, add to quantity, not item, else add to inventory as new item
+    if(match && match.quantity < 99) {
+      incrementInventoryItem(fish.name)
+      createNewMessage(message)
+    }
+    else
+      addNewInventoryItem(fish, 'fish', message)
   }
 
   const onHandleChop = () => {
-    let message = `You chopped the tree and found ${getRandomWood()} logs!`
-    createNewMessage(message)
+    let wood = getRandomWood()
+    let message = `You chopped the tree and found ${wood.name} logs!`
+    handleAddXp('woodcutting', wood.xp)
+    let match = inventory.items.find(item => item.name === wood.name)
+    if(match && match.quantity < 99) {
+      incrementInventoryItem(wood.name)
+      createNewMessage(message)
+    }
+    else
+      addNewInventoryItem(wood, 'logs', message)
   }
 
   const onHandleMine = () => {
-    let message = `You swing your pick at the rock and find ${getRandomOre()} ore!`
-    createNewMessage(message)
+    let ore = getRandomOre()
+    let message = `You swing your pick at the rock and find ${ore.name} ore!`
+    handleAddXp('mining', ore.xp)
+    let match = inventory.items.find(item => item.name === ore.name)
+    if(match && match.quantity < 99) {
+      incrementInventoryItem(ore.name)
+      createNewMessage(message)
+    }
+    else
+      addNewInventoryItem(ore, 'ore', message)
+  }
+
+  const addNewInventoryItem = (item, type, successMessage) => {
+    if(inventory.items.length < inventory.size) {
+      addInventoryItem({
+        id: uuidv4(),
+        name: item.name,
+        sellValue: item.sellValue,
+        stackable: item.stackable,
+        quantity: item.quantity > 0 ? item.quantity : 1,
+        type
+      })
+      createNewMessage(successMessage)
+    }
+    else
+      createNewMessage("Your inventory is already full.", "Error")
+  }
+
+  const handleDeleteItem = (id, name) => {
+    removeInventoryItem(name)
+    createNewMessage(`You throw away the ${name}.`)
   }
 
   const createNewMessage = (message, type="Game", sender=null) => {
-    console.log('new message:', message)
     let timestamp=null;
-    if(type==='Game' || type==='Social') {
+    if(type==='Game' || type==='Social' || type==="Error") {
       timestamp = newFormattedTimestamp()
     }
+    let newMessage = {
+      id: uuidv4(),
+      title: message,
+      timestamp,
+      type,
+      sender
+    }
+    // console.log('new message created:', newMessage)
     setMessages([
       ...messages,
-      {
-        id: uuidv4(),
-        title: message,
-        timestamp,
-        type,
-        sender
-      }
+      newMessage
     ])
   }
 
@@ -124,90 +148,102 @@ function App() {
     createNewMessage(messageText, "Social", "darthbitcoin")
   }
 
-  const hideDialogueBox = () => setDialogueVisible(false)
-
+  
   const handleSellItem = (sellItem) => {
-    console.log('selling item with id:', sellItem.id)
-
     if(sellItem.sellValue) {
-      // remove item from player inventory
-      setPlayerData({
-        ...playerData,
-        gold: playerData.gold + sellItem.sellValue,
-        inventory: {
-          ...playerData.inventory,
-          items: playerData.inventory.items.filter(item => item.id !== sellItem.id)
-        }
-      })
-      
-      createNewMessage(`Sold the ${sellItem.name} for ${sellItem.sellValue} gold.`)
+      let message = `Sold the ${sellItem.name} for ${sellItem.sellValue} gold.`
+      decrementInventoryItem(sellItem.name)
+      addGold(sellItem.sellValue)
+      createNewMessage(message)
     }
-    else {
-      console.log('item cannot be sold')
-    }
-    
-    // add appropriate coin amount to player gold
   }
 
-  const handleDeleteItem = (id) => {
-    console.log('deleting item with id:', id)
+  const handleSellAll = () => {
+    // loop through all items in inventory
 
-    // remove item from inventory (if it exists)
-    setPlayerData({
-      ...playerData,
-      inventory: {
-        ...playerData.inventory,
-        items: playerData.inventory.items.filter(item => item.id !== id)
+      // if(item.quantity > 0)
+      //  sellItem() {
+      //   decrementInventoryItem(item.name)
+      //   addGold(item.sellValue)
+      //  }
+
+    inventory.items.map(item => {
+      if(item.sellValue) {
+        console.log('selling item:', item.name)
+        let count = item.quantity;
+        while(item.quantity > 0) {
+          decrementInventoryItem(item.name)
+          addGold(item.sellValue)
+          count--;
+        }
+        console.log('finished with item', item.name,'. Ending quantity is:',item.quantity)
       }
     })
+  }
+  
+  // const handleSellAll = () => {
+  //   // loop through inventory, sell for each item in quantity, remove item
+  //   let inventorySnapshot = [...inventory.items]
+  //   console.log('------------inventorySnapshot:', inventorySnapshot)
+  //   inventorySnapshot.forEach(item => {
+  //     // only sell if there is a quantity of item. otherwise, assuming it is not sellable.
+  //     if(item.quantity) {
+  //       console.log('while selling, item', item.name, 'has quantity:', item.quantity)
+  //       // sell multiple
+  //       let count = item.quantity
+  //       while(count > 0) {
+  //         if(count===1)
+  //         console.log('this is the last count. its at 1')
+  //         console.log('START****************selling item with quantity:', item.quantity, 'and name:', item.name)
+  //         handleSellItem(item)
+  //         count--;
+  //       }
+  //       console.log('END******************item', item.name, 'sold to 0. starting next. inventory items:', inventory.items)
+  //     }
+  //   })
+  //   console.log('----END OF LOOP---- inventory items:', inventory.items)
+  // }
+  
+  const handleAddXp = (skillType, xp) => {
+    console.log('adding xp:', xp)
+    addXp(xp, skillType)
   }
 
   const handleCloseInventory = () => {
     setActiveScreen('Home') // or to a variable 'lastActiveScreen' to implement stack navigation-type functionality
   }
-
-  const addInventoryItem = (item) => {
-    const {id, name, sellValue, stackable} = item
-    setPlayerData({
-      ...playerData,
-      inventory: {
-        ...playerData.inventory,
-        items: [
-          ...playerData.inventory.items,
-          // NOTE: not working for 'stacking' items yet
-          {
-            id,
-            name,
-            sellValue,
-            stackable
-          }
-        ]
-      }
-    })
-  }
+        
+  const hideDialogueBox = () => setDialogueVisible(false)
 
   return (
-    <StyledApp className="app-container">
-      <PageHeader playerName={playerData.playerName} />
+    <StyledApp className="app-container noselect">
+      <PageHeader playerName={player.name} />
 
       {activeScreen === 'Inventory' && (
-        <section className="inventory-section">
-          <Inventory
-            inventory={playerData.inventory}
-            handleSellItem={handleSellItem}
-            handleDeleteItem={handleDeleteItem}
-            handleCloseInventory={handleCloseInventory}
-          />
-        </section>
+        <Inventory
+          handleSellItem={handleSellItem}
+          handleSellAll={handleSellAll}
+          handleDeleteItem={handleDeleteItem}
+          handleCloseInventory={handleCloseInventory}
+        />
       )}
 
       <main style={{backgroundImage:"url('/res/game-background.jpeg')"}}>
         {/* Top Stats Bar */}
         <section className="top-stats-bar">
           {/* Left Side */}
-          <InventoryButton handleClick={handleInventoryClick} />
+          <InventoryButton
+            numberOfItems={inventory.items.length}
+            maxItems={inventory.size}
+            handleClick={handleInventoryClick}
+          />
           {/* Right Side */}
-          <GoldText goldNumber={playerData.gold} />
+          <StatusBar
+            goldNumber={player.gold}
+            fishingSkill={skills.fishingXp}
+            woodcuttingSkill={skills.woodcuttingXp}
+            miningSkill={skills.miningXp}
+          />
         </section>
 
         {/* Action Buttons */}
@@ -240,4 +276,20 @@ function App() {
   );
 }
 
-export default App;
+const mapStateToProps = (state) => ({
+  player: state.player,
+  inventory: state.inventory,
+  skills: state.skills
+})
+
+const mapDispatchToProps = {
+  addGold, removeGold,
+  addXp,
+  addInventoryItem, removeInventoryItem,
+  incrementInventoryItem, decrementInventoryItem,
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(App)

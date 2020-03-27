@@ -23,6 +23,9 @@ const StyledGoldText = styled.div`
     .gold-text-number {
       font-size: 28px;
       line-height: 1.25;
+      display: inline-block;
+      padding-top: 12px;
+      font-size: 18px;
     }
   }
 `

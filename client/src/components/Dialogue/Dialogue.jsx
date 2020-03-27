@@ -4,7 +4,6 @@ import { StyledDialogueBox } from './dialogue.style'
 import { helpTextData } from '../../data/helpText.data'
 
 
-
 export const Dialogue = ({
   messages,
   handleSendUserMessage,
@@ -25,7 +24,6 @@ export const Dialogue = ({
   }
 
   const handleDialogueTabChange = (tabName) => {
-    console.log('tab changed to:', tabName)
     if(tabName==='Exit')
       hideDialogueBox()
     else if(tabName !== activeTab) {
@@ -38,7 +36,7 @@ export const Dialogue = ({
       case 'All':
         return messages;
       case 'Game':
-        return messages.filter(message => message.type === 'Game')
+        return messages.filter(message => message.type === 'Game' || message.type==="Error")
       case 'Social':
         return messages.filter(message => message.type === 'Social')
       case 'Help':

@@ -12,7 +12,6 @@ export const newFormattedTimestamp = () => {
 
   // create new timstamp from date object and return
   let newTimestamp = `${hours}:${minutes}`
-  console.log('newTimestmap:', newTimestamp)
 
   return newTimestamp;
 }
