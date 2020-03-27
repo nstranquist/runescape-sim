@@ -13,7 +13,7 @@ export const InventoryUI = ({
   handleSellAll,
   handleDeleteItem,
   handleCloseInventory,
-  increaseInventorySize,
+  handleIncreaseInventorySize,
 }) => {
 
   const renderInventoryItems = () => {
@@ -41,7 +41,7 @@ export const InventoryUI = ({
 
   const handleAddSize = () => {
     // increase inventory size
-    increaseInventorySize()
+    handleIncreaseInventorySize()
 
   }
 
@@ -82,5 +82,5 @@ const mapStateToProps = (state) => ({
 
 export const Inventory = connect(
   mapStateToProps,
-  { increaseInventorySize }
+  {  }
 )(InventoryUI)

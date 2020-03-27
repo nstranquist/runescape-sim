@@ -182,6 +182,8 @@ export const Game = ({
 
   return (
     <>
+
+      {/* Inventory "Modal" type functionality */}
       {activeScreen === 'Inventory' && (
         <Inventory
           handleSellItem={handleSellItem}
