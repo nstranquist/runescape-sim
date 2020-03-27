@@ -1,7 +1,7 @@
 import { ConnectedGame } from './Game'
-import { Profile } from './Profile'
+import { ConnectedProfile } from './Profile'
 
 export {
   ConnectedGame as Game,
-  Profile
+  ConnectedProfile as Profile
 }
