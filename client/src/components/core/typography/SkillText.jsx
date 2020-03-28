@@ -29,6 +29,8 @@ export const SkillText = ({
         return "/res/trees/holy-oak.svg"
       case 'mining':
         return "/res/rocks/stone-pile.svg"
+      default:
+        break;
     }
   }
 

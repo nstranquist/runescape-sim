@@ -11,7 +11,6 @@ export const Dialogue = ({
 }) => {
   const bottomBoxRef = createRef()
 
-  const [dialogueText, setDialogueText] = useState("")
   const [activeTab, setActiveTab] = useState("All")
 
   // scroll to bottom
@@ -21,6 +20,10 @@ export const Dialogue = ({
 
   const scrollToBottom = () => {
     bottomBoxRef.current.scrollIntoView({ behavior: "smooth" });
+  }
+
+  const dialogueSubmit = (dialogueText) => {
+    handleSendUserMessage(dialogueText)
   }
 
   const handleDialogueTabChange = (tabName) => {
@@ -46,25 +49,6 @@ export const Dialogue = ({
     }
   }
 
-  const handleDialogueChange = (e) => {
-    setDialogueText(e.target.value)
-  }
-
-  const handleDialogueSubmit = (e) => {
-    e.preventDefault()
-
-    // error-checking
-    if(dialogueText.length < 1)
-      console.log('must have text')
-    else {
-      // submit form
-      handleSendUserMessage(dialogueText)
-      resetDialogue()
-    }
-  }
-  
-  const resetDialogue = () => setDialogueText("")
-
   return (
     <StyledDialogueBox className="dialogue-box-container">
 
@@ -79,9 +63,7 @@ export const Dialogue = ({
       />
 
       <DialogueInput
-        dialogueText={dialogueText}
-        handleDialogueChange={handleDialogueChange}
-        handleDialogueSubmit={handleDialogueSubmit}
+        dialogueSubmit={dialogueSubmit}
       />
     </StyledDialogueBox>
   )

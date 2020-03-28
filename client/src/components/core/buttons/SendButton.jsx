@@ -3,9 +3,7 @@ import React from 'react'
 
 // const StyledSendButton = styled.div``
 
-export const SendButton = ({
-  // handleSend
-}) => {
+export const SendButton = () => {
   return (
     // <div className="send-btn-container">
       <button className="dialogue-send-btn" type="submit">

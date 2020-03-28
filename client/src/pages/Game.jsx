@@ -137,7 +137,7 @@ export const Game = ({
   }
 
   const handleSellAll = () => {
-    inventory.items.map(item => {
+    inventory.items.forEach(item => {
       if(item.sellValue) {
         let count = item.quantity;
         while(item.quantity > 0) {
@@ -150,14 +150,13 @@ export const Game = ({
   }
   
   const handleAddXp = (skillType, xp) => {
-    console.log('adding xp:', xp)
     addXp(xp, skillType)
   }
 
   const handleCloseModal = () => {
     setActiveScreen('Home') // or to a variable 'lastActiveScreen' to implement stack navigation-type functionality
   }
-        
+  
   const hideDialogueBox = () => setDialogueVisible(false)
 
   const handleIncreaseInventorySize = (cost) => {
@@ -168,10 +167,10 @@ export const Game = ({
       increaseInventorySize()
     }
   }
+        
 
   return (
     <>
-
       {/* Inventory "Modal" type functionality */}
       {activeScreen === 'Inventory' && (
         <Inventory
