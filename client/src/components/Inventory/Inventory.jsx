@@ -16,7 +16,7 @@ const Inventory = ({
   handleDeleteItem,
   handleCloseInventory,
   handleIncreaseInventorySize,
-  handleMarketplaceClick,
+  handleNavigateScreen,
 }) => {
 
   const renderInventoryItems = () => {
@@ -45,7 +45,7 @@ const Inventory = ({
   const handleAddSize = () => {
     console.log('calling increase size')
     // increase inventory size
-    handleIncreaseInventorySize()
+    handleIncreaseInventorySize(sizeCost)
 
   }
 
@@ -78,7 +78,7 @@ const Inventory = ({
       {/* Inventory Button Bar */}
       <InventoryButtonBar
         handleSellAll={handleSellAll}
-        handleMarketplaceClick={handleMarketplaceClick}
+        handleNavigateScreen={handleNavigateScreen}
       />
     </StyledInventory>
   )

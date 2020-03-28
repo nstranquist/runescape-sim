@@ -17,11 +17,11 @@ const StyledInventoryButton = styled.div`
 export const InventoryButton = ({
   numberOfItems,
   maxItems,
-  handleClick
+  handleNavigateScreen
 }) => {
   return (
     <StyledInventoryButton className="inventory-btn-container"
-      onClick={handleClick}>
+      onClick={() => handleNavigateScreen("Inventory")}>
       <div className="inventory-btn-inner">
         Inventory
         <span> ({numberOfItems < maxItems ? numberOfItems : "MAX"}) </span>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 // import components
@@ -39,15 +39,9 @@ export const Game = ({
   const [dialogueVisible, setDialogueVisible] = useState(true)
   const [activeScreen, setActiveScreen] = useState('Home') // 'Inventory', 'Exchange', etc. (react-router / lazy load??)
 
-  useEffect(() => {
-    console.log('-----------inventory items change:', inventory.items)
-  }, [inventory.items])
 
-  const handleInventoryClick = () => {
-    setActiveScreen('Inventory')
-  }
-  const handleMarketplaceClick = () => {
-    setActiveScreen('Marketplace')
+  const handleNavigateScreen = (screenName) => {
+    setActiveScreen(screenName)
   }
 
   const onHandleFish = () => {
@@ -166,13 +160,13 @@ export const Game = ({
         
   const hideDialogueBox = () => setDialogueVisible(false)
 
-  const handleIncreaseInventorySize = () => {
-    // get cost for it,
-    
+  const handleIncreaseInventorySize = (cost) => {
     // if player can afford it, subtract cost (or check that in component)
-
-    // after success, increase the size
-    increaseInventorySize()
+    if((player.gold - cost) > 0) {
+      removeGold(cost)    
+      // after success, increase the size
+      increaseInventorySize()
+    }
   }
 
   return (
@@ -186,13 +180,14 @@ export const Game = ({
           handleDeleteItem={handleDeleteItem}
           handleCloseInventory={handleCloseModal}
           handleIncreaseInventorySize={handleIncreaseInventorySize}
-          handleMarketplaceClick={handleMarketplaceClick}
+          handleNavigateScreen={handleNavigateScreen}
         />
       )}
 
       {activeScreen === 'Marketplace' && (
         <Marketplace
           handleCloseMarketplace={handleCloseModal}
+          handleNavigateScreen={handleNavigateScreen}
         />
       )}
 
@@ -203,7 +198,7 @@ export const Game = ({
           <InventoryButton
             numberOfItems={inventory.items.length}
             maxItems={inventory.size}
-            handleClick={handleInventoryClick}
+            handleNavigateScreen={handleNavigateScreen}
           />
           {/* Right Side */}
           <StatusBar

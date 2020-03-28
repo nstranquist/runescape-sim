@@ -33,17 +33,17 @@ const StyledButtonBar = styled.div`
   }
 `
 
-export const InventoryButtonBar = ({
-  handleSellAll,
+export const MarketplaceButtonBar = ({
+  handleClearAll,
   handleNavigateScreen,
 }) => {
   return (
-    <StyledButtonBar className="inventory-button-bar">
-      <div className="button-bar-btn" onClick={() => handleNavigateScreen("Marketplace")}>
-        Marketplace
+    <StyledButtonBar className="marketplace-button-bar">
+      <div className="button-bar-btn" onClick={() => handleNavigateScreen("Inventory")}>
+        Inventory
       </div>
-      <div className="button-bar-btn" onClick={handleSellAll}>
-        Sell All
+      <div className="button-bar-btn" onClick={handleClearAll}>
+        Clear All
       </div>
       {/* <div className="button-bar-btn">
         Filter By:
