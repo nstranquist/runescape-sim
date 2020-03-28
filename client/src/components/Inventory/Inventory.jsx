@@ -4,16 +4,19 @@ import { connect } from 'react-redux'
 import { InventoryButtonBar, InventoryItem, EmptyInventoryItem } from './index'
 import { StyledInventory } from './inventory.style'
 // redux
-import { increaseInventorySize } from '../../store/inventory'
+import { selectSizeCost } from '../../store/selectors'
 
 
-export const InventoryUI = ({
+
+const Inventory = ({
   inventory,
+  sizeCost,
   handleSellItem,
   handleSellAll,
   handleDeleteItem,
   handleCloseInventory,
   handleIncreaseInventorySize,
+  handleMarketplaceClick,
 }) => {
 
   const renderInventoryItems = () => {
@@ -40,6 +43,7 @@ export const InventoryUI = ({
   }
 
   const handleAddSize = () => {
+    console.log('calling increase size')
     // increase inventory size
     handleIncreaseInventorySize()
 
@@ -56,8 +60,11 @@ export const InventoryUI = ({
         </div>
         <h5>
           size: {inventory.size}
-          <span style={{display:'inline-block',padding:5,lineHeight:1,fontSize:"16px",marginLeft:4,background:"rgb(200,200,200)",color:"#000",cursor:'pointer',}}
-            onClick={handleAddSize}>+</span>
+          <span className="add-size-icon" onClick={handleAddSize}>
+            +</span>
+          <span className="add-size-cost">
+            {sizeCost}
+          </span>
         </h5>
       </header>
 
@@ -71,16 +78,18 @@ export const InventoryUI = ({
       {/* Inventory Button Bar */}
       <InventoryButtonBar
         handleSellAll={handleSellAll}
+        handleMarketplaceClick={handleMarketplaceClick}
       />
     </StyledInventory>
   )
 }
 
 const mapStateToProps = (state) => ({
-  inventory: state.inventory
+  inventory: state.inventory,
+  sizeCost: selectSizeCost(state)
 })
 
-export const Inventory = connect(
+export const ConnectedInventory = connect(
   mapStateToProps,
   {  }
-)(InventoryUI)
+)(Inventory)

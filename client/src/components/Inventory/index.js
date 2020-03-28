@@ -1,10 +1,10 @@
-import { Inventory } from './Inventory'
+import { ConnectedInventory } from './Inventory'
 import { InventoryItem } from './Item'
 import { EmptyInventoryItem } from './EmptyItem'
 import { InventoryButtonBar } from './ButtonBar'
 
 export {
-  Inventory,
+  ConnectedInventory as Inventory,
   InventoryItem,
   EmptyInventoryItem,
   InventoryButtonBar

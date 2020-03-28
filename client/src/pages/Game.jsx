@@ -4,10 +4,10 @@ import { v4 as uuidv4 } from 'uuid'
 // import components
 import { ActionButtons } from '../components/ActionButtons'
 import { Dialogue } from '../components/Dialogue'
-import { Inventory, InventoryButtonBar } from '../components/Inventory'
+import { Inventory } from '../components/Inventory'
 import { InventoryButton } from '../components/core/buttons'
-import { PageHeader } from '../components/layout'
 import { StatusBar } from '../components/StatusBar';
+import { Marketplace } from '../components/Marketplace'
 // import utils
 import { getRandomFish } from '../data/fish.data'
 import { getRandomWood } from '../data/wood.data'
@@ -15,41 +15,27 @@ import { getRandomOre } from '../data/ores.data'
 import { newFormattedTimestamp } from '../utils/timestamp.utils'
 // import redux
 import {
-  addInventoryItem, removeInventoryItem, decrementInventoryItem, incrementInventoryItem
+  addInventoryItem, removeInventoryItem, decrementInventoryItem, incrementInventoryItem, increaseInventorySize,
 } from '../store/inventory'
 import { addXp } from '../store/skills'
 import { addGold, removeGold } from '../store/player'
-// import styles
-import { StyledApp } from '../styles/app-layout.style';
+import { addMessage, removeMessage } from '../store/messages'
 
-const starterMessages = [
-  {
-    id: uuidv4(),
-    title: "You caught a Tuna!",
-    timestamp: "12:40",
-    type: "Game"
-  },
-  {
-    id: uuidv4(),
-    title: "You caught a Mackeral!",
-    timestamp: "16:23",
-    type: "Game"
-  }
-]
 
 // TODO: color-code the timestamp (green or maroon), name (blue?), message text (white)
 export const Game = ({
   player,
   inventory,
-  skills,
+  messages,
+  // functions
   addGold, removeGold,
   addXp,
   addInventoryItem, removeInventoryItem,
   incrementInventoryItem,
   decrementInventoryItem,
-
+  increaseInventorySize,
+  addMessage, removeMessage
 }) => {
-  const [messages, setMessages] = useState(starterMessages)
   const [dialogueVisible, setDialogueVisible] = useState(true)
   const [activeScreen, setActiveScreen] = useState('Home') // 'Inventory', 'Exchange', etc. (react-router / lazy load??)
 
@@ -59,6 +45,9 @@ export const Game = ({
 
   const handleInventoryClick = () => {
     setActiveScreen('Inventory')
+  }
+  const handleMarketplaceClick = () => {
+    setActiveScreen('Marketplace')
   }
 
   const onHandleFish = () => {
@@ -136,10 +125,7 @@ export const Game = ({
       sender
     }
     // console.log('new message created:', newMessage)
-    setMessages([
-      ...messages,
-      newMessage
-    ])
+    addMessage(newMessage)
   }
 
   const handleSendUserMessage = (messageText) => {
@@ -174,11 +160,20 @@ export const Game = ({
     addXp(xp, skillType)
   }
 
-  const handleCloseInventory = () => {
+  const handleCloseModal = () => {
     setActiveScreen('Home') // or to a variable 'lastActiveScreen' to implement stack navigation-type functionality
   }
         
   const hideDialogueBox = () => setDialogueVisible(false)
+
+  const handleIncreaseInventorySize = () => {
+    // get cost for it,
+    
+    // if player can afford it, subtract cost (or check that in component)
+
+    // after success, increase the size
+    increaseInventorySize()
+  }
 
   return (
     <>
@@ -189,7 +184,15 @@ export const Game = ({
           handleSellItem={handleSellItem}
           handleSellAll={handleSellAll}
           handleDeleteItem={handleDeleteItem}
-          handleCloseInventory={handleCloseInventory}
+          handleCloseInventory={handleCloseModal}
+          handleIncreaseInventorySize={handleIncreaseInventorySize}
+          handleMarketplaceClick={handleMarketplaceClick}
+        />
+      )}
+
+      {activeScreen === 'Marketplace' && (
+        <Marketplace
+          handleCloseMarketplace={handleCloseModal}
         />
       )}
 
@@ -226,8 +229,9 @@ export const Game = ({
               hideDialogueBox={hideDialogueBox}
             />
           ) : (
-            <button onClick={() => setDialogueVisible(true)} style={{textAlign:'center', margin:"0 auto", display:'block'}}>
-              Enter Dialogue</button>
+            <button className="show-dialogue-btn" onClick={() => setDialogueVisible(true)}
+              style={{textAlign:'center', margin:"0 auto", display:'block'}}>
+              Show Dialogue</button>
           )}
         </section>
       </main>
@@ -238,7 +242,7 @@ export const Game = ({
 const mapStateToProps = (state) => ({
   player: state.player,
   inventory: state.inventory,
-  skills: state.skills
+  messages: state.messages.messages
 })
 
 const mapDispatchToProps = {
@@ -246,6 +250,8 @@ const mapDispatchToProps = {
   addXp,
   addInventoryItem, removeInventoryItem,
   incrementInventoryItem, decrementInventoryItem,
+  increaseInventorySize,
+  addMessage, removeMessage
 }
 
 export const ConnectedGame = connect(

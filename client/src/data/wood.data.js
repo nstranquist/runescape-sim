@@ -17,12 +17,6 @@ export const woodData = [
     xp: 9,
   },
   {
-    name: "Dead",
-    sellValue: 6,
-    stackable: true,
-    xp: 11,
-  },
-  {
     name: "Oak",
     sellValue: 9,
     stackable: true,
@@ -58,6 +52,12 @@ export const woodData = [
     stackable: true,
     xp: 60
   },
+  {
+    name: "Elder",
+    sellValue: 166,
+    stackable: false,
+    xp: 116
+  }
 ]
 
 export const getRandomWood = () => {

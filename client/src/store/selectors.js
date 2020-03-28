@@ -1,47 +1,4 @@
-
-
-export const xpLevels = {
-  fishing: [
-    600,
-    1800,
-    3000,
-    5000,
-    8000,
-    20600,
-    33600,
-    50600,
-    71600,
-    97600,
-    129600
-  ],
-  woodcutting: [
-    600,
-    1800,
-    3000,
-    5000,
-    8000,
-    20600,
-    33600,
-    50600,
-    71600,
-    97600,
-    129600
-  ],
-  mining: [
-    600,
-    1800,
-    3000,
-    5000,
-    8000,
-    20600,
-    33600,
-    50600,
-    71600,
-    97600,
-    129600
-  ],
-}
-
+import { upgradesData } from '../data/upgrades.data'
 
 // select level from xp
 export const selectFishingLevel = (state) => {
@@ -51,7 +8,7 @@ export const selectFishingLevel = (state) => {
   let flag=false;
   let count = 0;
   while(!flag) {
-    if(xpLevels.fishing[count] > fishingXp) {
+    if(upgradesData.skills.fishing[count] > fishingXp) {
       fishingLevel = count+1;
       flag = true;
     }
@@ -68,7 +25,7 @@ export const selectWoodcuttingLevel = (state) => {
   let flag=false;
   let count = 0;
   while(!flag) {
-    if(xpLevels.woodcutting[count] > woodcuttingXp) {
+    if(upgradesData.skills.woodcutting[count] > woodcuttingXp) {
       woodcuttingLevel = count+1;
       flag = true;
     }
@@ -85,7 +42,7 @@ export const selectMiningLevel = (state) => {
   let flag=false;
   let count = 0;
   while(!flag) {
-    if(xpLevels.mining[count] > miningXp) {
+    if(upgradesData.skills.mining[count] > miningXp) {
       miningLevel = count+1;
       flag = true;
     }
@@ -93,4 +50,8 @@ export const selectMiningLevel = (state) => {
   }
 
   return miningLevel
+}
+
+export const selectSizeCost = (state) => {
+  return upgradesData.inventory.size[state.inventory.size - 12]
 }

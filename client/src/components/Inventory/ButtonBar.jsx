@@ -34,12 +34,12 @@ const StyledButtonBar = styled.div`
 `
 
 export const InventoryButtonBar = ({
-  // handleSelectMarketplace,
-  handleSellAll
+  handleSellAll,
+  handleMarketplaceClick,
 }) => {
   return (
     <StyledButtonBar className="inventory-button-bar">
-      <div className="button-bar-btn">
+      <div className="button-bar-btn" onClick={handleMarketplaceClick}>
         Marketplace
       </div>
       <div className="button-bar-btn" onClick={handleSellAll}>

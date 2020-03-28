@@ -12,7 +12,6 @@ const StyledLink = styled(Link)`
 const StyledHeader = styled.header`
   .header-player-name {
     color: #fff;
-    opacity: .82;
     text-decoration: none;
 
     &:hover {
@@ -22,7 +21,6 @@ const StyledHeader = styled.header`
 
   .header-brand {
     color: #fff;
-    opacity: .82;
     text-decoration: none;
     cursor: pointer;
   }

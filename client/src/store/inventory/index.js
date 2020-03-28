@@ -35,15 +35,8 @@ export const increaseInventorySize = () => ({
 
 // reducer
 const initialState = {
-  size: 24,
+  size: 12,
   items: [
-    {
-      id: uuidv4(),
-      name: 'Tuna',
-      sellValue: 12,
-      stackable: true,
-      quantity: 12,
-    },
     {
       id: uuidv4(),
       name: 'Bronze Sword',

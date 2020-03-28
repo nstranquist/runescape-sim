@@ -48,6 +48,24 @@ export const StyledInventory = styled.div`
       font-size: 14px;
       font-weight:500;
     }
+    .add-size-icon,
+    .add-size-cost {
+      display: inline-block;
+      font-size: 16px;
+      padding: 5px;
+    }
+    .add-size-icon {
+      margin-left: 8px;
+      background: rgb(200,200,200);
+      color: #000;
+      cursor: pointer;
+      line-height: .75;
+    }
+    .add-size-cost {
+      color: gold;
+      line-height: 1;
+    }
+    style={{display:'inline-block', padding: 4, lineHeight:1,fontSize:16,color:"gold"}}
   }
   .inventory-items-inner {
     margin: 0 auto;
