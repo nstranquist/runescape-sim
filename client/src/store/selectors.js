@@ -14,7 +14,7 @@ export const selectFishingLevel = (state) => {
     }
     count++;
   }
-
+  console.log('fishing level from selector:', fishingLevel)
   return fishingLevel
 }
 

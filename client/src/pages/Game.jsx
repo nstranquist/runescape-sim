@@ -6,8 +6,10 @@ import { ActionButtons } from '../components/ActionButtons'
 import { Dialogue } from '../components/Dialogue'
 import { Inventory } from '../components/Inventory'
 import { InventoryButton } from '../components/core/buttons'
-import { StatusBar } from '../components/StatusBar';
+import { StatsBox } from '../components/StatsBox';
 import { Marketplace } from '../components/Marketplace'
+import { SubBar } from '../components/layout';
+import { StyledGame } from './styles/game.style'
 // import utils
 import { getRandomFish } from '../data/fish.data'
 import { getRandomWood } from '../data/wood.data'
@@ -74,7 +76,8 @@ export const Game = ({
 
   const onHandleMine = () => {
     let ore = getRandomOre()
-    let message = `You swing your pick at the rock and find ${ore.name} ore!`
+    // let message = `You swing your pick at the rock and find ${ore.name} ore!`
+    let message = `You found ${ore.name} ore!`
     handleAddXp('mining', ore.xp)
     let match = inventory.items.find(item => item.name === ore.name)
     if(match && match.quantity < 99) {
@@ -190,45 +193,50 @@ export const Game = ({
         />
       )}
 
-      <main style={{backgroundImage:"url('/res/game-background.jpeg')"}}>
-        {/* Top Stats Bar */}
-        <section className="top-stats-bar">
-          {/* Left Side */}
-          <InventoryButton
-            numberOfItems={inventory.items.length}
-            maxItems={inventory.size}
-            handleNavigateScreen={handleNavigateScreen}
-          />
-          {/* Right Side */}
-          <StatusBar
-            goldNumber={player.gold}
-          />
-        </section>
+      <StyledGame>
 
-        {/* Action Buttons */}
-        <section className="action-buttons">
-          <ActionButtons
-            handleFish={onHandleFish}
-            handleChop={onHandleChop}
-            handleMine={onHandleMine}
-          />
-        </section>
-
-        {/* Dialogue Box */}
-        <section className="dialogue-box">
-          {dialogueVisible ? (
-            <Dialogue
-              messages={messages}
-              handleSendUserMessage={handleSendUserMessage}
-              hideDialogueBox={hideDialogueBox}
+        {/* SubBar to hold stats, other useful info */}
+        <SubBar />
+        
+        <div className="game-inner">
+          {/* Top Stats Bar */}
+          <section className="top-stats-bar">
+            {/* Left Side */}
+            <InventoryButton
+              numberOfItems={inventory.items.length}
+              maxItems={inventory.size}
+              handleNavigateScreen={handleNavigateScreen}
             />
-          ) : (
-            <button className="show-dialogue-btn" onClick={() => setDialogueVisible(true)}
-              style={{textAlign:'center', margin:"0 auto", display:'block'}}>
-              Show Dialogue</button>
-          )}
-        </section>
-      </main>
+            {/* Right Side */}
+            <StatsBox goldNumber={player.gold} />
+          </section>
+
+          {/* Action Buttons */}
+          <section className="action-buttons">
+            <ActionButtons
+              handleFish={onHandleFish}
+              handleChop={onHandleChop}
+              handleMine={onHandleMine}
+              createNewMessage={createNewMessage}
+            />
+          </section>
+
+          {/* Dialogue Box */}
+          <section className="dialogue-box">
+            {dialogueVisible ? (
+              <Dialogue
+                messages={messages}
+                handleSendUserMessage={handleSendUserMessage}
+                hideDialogueBox={hideDialogueBox}
+              />
+            ) : (
+              <button className="show-dialogue-btn" onClick={() => setDialogueVisible(true)}
+                style={{textAlign:'center', margin:"0 auto", display:'block'}}>
+                Show Dialogue</button>
+            )}
+          </section>
+        </div>
+      </StyledGame>
     </>
   );
 }
@@ -248,7 +256,7 @@ const mapDispatchToProps = {
   addMessage, removeMessage
 }
 
-export const ConnectedGame = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(Game)

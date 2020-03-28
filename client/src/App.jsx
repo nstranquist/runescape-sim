@@ -1,26 +1,30 @@
 import React from 'react'
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 // import page components
-import { Game, Profile } from './pages'
-import { PageHeader } from './components/layout'
+// import { Game, Profile } from './pages'
+import { PageHeader, Footer } from './components/layout'
 import { StyledApp } from './styles/app-layout.style'
+import asyncComponent from './hocs/asyncComponent'
 // import styles
 import './App.css';
 
-// TODO: make lazy imports (use HOC)
+// Async Route Components (Lazy Loading)
+const AsyncComponent = (uri) => asyncComponent(() => {
+  console.log('uri of async component:', uri)
+  return import(`${uri}`)
+})
+
 const App = () => {
   return (
     <BrowserRouter>
       <StyledApp className="app-container noselect">
         <PageHeader playerName={"darthbitcoin"} />
         <Switch>
-          <Route exact path="/" component={Game} />
-          <Route exact path="/game" component={Game} />
-          <Route exact path="/profile" component={Profile} />
+          <Route exact path="/" component={AsyncComponent("./pages/Game")} />
+          <Route exact path="/game" component={AsyncComponent("./pages/Game")} />
+          <Route exact path="/profile" component={AsyncComponent("./pages/Profile")} />
         </Switch>
-        <footer>
-          <p className="footer-text">Made by Nico and Eric during the Great Coronavirus Lockdown of 2020</p>
-        </footer>
+        <Footer />
       </StyledApp>
     </BrowserRouter>
   )

@@ -1,7 +1,7 @@
-import { ConnectedGame } from './Game'
-import { ConnectedProfile } from './Profile'
+import Game from './Game'
+import Profile from './Profile'
 
 export {
-  ConnectedGame as Game,
-  ConnectedProfile as Profile
+  Game,
+  Profile
 }

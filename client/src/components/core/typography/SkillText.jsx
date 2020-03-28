@@ -4,13 +4,19 @@ import styled from 'styled-components'
 const StyledSkillText = styled.div`
   font-size: 18px;
   line-height: 1.25;
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  margin-right: 10px;
 
   .skill-text-img {
     height: 28px;
     width: 28px;
   }
   .skill-text {
-    margin-top: 0; margin-bottom: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    margin-left: 4px;
     padding-top: 6px;
     padding-bottom: 6px;
   }

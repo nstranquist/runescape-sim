@@ -76,18 +76,62 @@ export const StyledActionButtons = styled.div`
 export const ActionButtons = ({
   handleFish,
   handleChop,
-  handleMine
+  handleMine,
+  createNewMessage
 }) => {
   const [skillActive, setSkillActive] = useState(null)
-  const [percentage, setPercentage] = useState(100)
+  const [percentage, setPercentage] = useState(0)
+  
+  let startTime = null;
+
+  const handleEndAnimation = () => {
+    startTime = null;
+    setPercentage(0)
+    setSkillActive(null)
+  }
 
   const handleSkillClick = (skillType, callback, duration=1000) => {
     if(skillActive === null) {
+      createNewMessage(`You begin ${skillType}...`)
       setSkillActive(skillType)
-      setTimeout(() => {
-        callback()
-        setSkillActive(null)
-      }, duration)
+      requestAnimationFrame((timestamp) => {
+        animateProgressBar(timestamp, duration, callback)
+      })
+    }
+    else
+      createNewMessage(`You are already ${skillActive}.`, "Error")
+  }
+
+  const animateProgressBar = (timestamp, duration, callback) => {
+    console.log('time in animframe:', timestamp)
+
+    if(timestamp === undefined)
+      timestamp = Date.now()
+
+    if(!startTime)
+      startTime = timestamp;
+
+    let progress = timestamp - startTime;
+    console.log("progress:", progress)
+    // progress = Math.min(progress, 1);
+    // console.log('progress after formatting:', progress)
+
+    // modify the style
+    if(percentage < 100) {
+      setPercentage(((progress / 10).toFixed(2)) / (duration/1000))
+      console.log('new percentage:', percentage)
+    }
+    else {
+      console.log('animation finished')
+    }
+    
+    if(progress < duration)
+      requestAnimationFrame((timestamp) => {
+        animateProgressBar(timestamp, duration, callback)
+      })
+    else {
+      handleEndAnimation()
+      callback()
     }
   }
 

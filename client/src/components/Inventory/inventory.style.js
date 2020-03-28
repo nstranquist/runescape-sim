@@ -8,7 +8,7 @@ export const StyledInventory = styled.div`
   bottom: 15vh;
   height: 70vh;
   width: 70vw;
-  background: rgba(0,0,0,.75);
+  background: rgba(16,16,16,.96);
   color: #fff;
   z-index: 1001;
 

@@ -55,7 +55,7 @@ export const Profile = ({
         <div className="profile-inner">
           <div className="profile-item player">
             <div className="profile-player">
-              Name: darthbitcoin
+              Name: {playerName}
             </div>
             <div className="profile-player">
               Gold: {playerGold}
@@ -93,7 +93,7 @@ const mapStateToProps = (state) => ({
   inventory: state.inventory,
 })
 
-export const ConnectedProfile = connect(
+export default connect(
   mapStateToProps,
   {  }
 )(Profile)

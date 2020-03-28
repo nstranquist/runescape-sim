@@ -32,6 +32,7 @@ export const StyledDialogueBox = styled.div`
   line-height: 1.25;
   // font-size: 16px;
   letter-spacing: 1px;
+  margin-bottom: 20px;
 
   .dialogue-header {
     display: flex;

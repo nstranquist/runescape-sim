@@ -5,7 +5,7 @@ export const ProgressBar = ({
   skillType
 }) => {
   return (
-    <div className={`progress-bar ${skillType}`}>
+    <div className={`progress-bar ${skillType}`} style={{ width: `${percentage}%` }}>
       
     </div>
   )

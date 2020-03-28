@@ -1,7 +1,9 @@
-import { TopBar } from './TopBar'
 import { PageHeader } from './PageHeader'
+import { Footer } from './Footer'
+import { ConnectedSubBar } from './SubBar'
 
 export {
-  TopBar,
-  PageHeader
+  PageHeader,
+  Footer,
+  ConnectedSubBar as SubBar
 }

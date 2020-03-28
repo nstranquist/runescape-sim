@@ -8,7 +8,7 @@ export const StyledMarketplace = styled.div`
   bottom: 25vh;
   height: 50vh;
   width: 80vw;
-  background: rgba(0,0,0,.75);
+  background: rgba(80,72,90,1);
   // background: rgba(101,67,33,.88);
   // background: rgba(84,61,55,.88);
   // background: rgba(106,84,62,.88);
