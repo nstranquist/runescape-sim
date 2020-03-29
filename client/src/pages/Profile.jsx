@@ -1,37 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import styled from 'styled-components'
+import { StyledProfile } from './styles/profile.style'
 
-const StyledProfile = styled.div`
-  max-width: 75%;
-  margin: 0 auto;
-  text-align: center;
-
-  .profile-header {
-    // text-align: center;
-    margin-bottom: 2%;
-
-    h1 {
-      text-decoration: underline;
-    }
-  }
-
-  .profile-inner {
-    display: flex;
-    flex-direction: column;
-    margin-top: 2%;
-
-    * {
-      margin-bottom: 1%;
-    }
-
-    .profile-item {
-      border-bottom: 1px solid rgba(0,0,0,.2);
-      padding-top: 8px;
-      padding-bottom: 8px;
-    }
-  }
-`
 
 export const Profile = ({
   playerName,

@@ -2,16 +2,13 @@ import styled from 'styled-components'
 
 export const StyledMarketplace = styled.div`
   position: absolute;
-  left: 10vw;
-  right: 10vw;
+  left: 12vw;
+  right: 12vw;
   top: 25vh;
   bottom: 25vh;
   height: 50vh;
-  width: 80vw;
-  background: rgba(80,72,90,1);
-  // background: rgba(101,67,33,.88);
-  // background: rgba(84,61,55,.88);
-  // background: rgba(106,84,62,.88);
+  width: 76vw;
+  background: rgba(22,22,22,.99);
   color: #fff;
   z-index: 1002;
 
