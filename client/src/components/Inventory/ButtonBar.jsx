@@ -27,8 +27,7 @@ const StyledButtonBar = styled.div`
     opacity: .75;
 
     &:hover {
-      opacity: .9;
-      text-decoration: underline;
+      opacity: 1;
     }
   }
 `

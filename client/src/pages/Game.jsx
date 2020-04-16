@@ -231,7 +231,9 @@ export const Game = ({
               />
             ) : (
               <button className="show-dialogue-btn" onClick={() => setDialogueVisible(true)}
-                style={{textAlign:'center', margin:"0 auto", display:'block'}}>
+                style={{ textAlign:'center', margin:"0 auto", display:'block', outline:0,border:0,padding:"10px 12px",fontSize:"16px",
+                  background:"rgba(0,0,0,.6)", color:"#fff", cursor:"pointer",
+                }}>
                 Show Dialogue</button>
             )}
           </section>
