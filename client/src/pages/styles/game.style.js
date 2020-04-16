@@ -3,9 +3,10 @@ import styled from 'styled-components'
 export const StyledGame = styled.main`
   position: absolute;
   top: 55px;
-  bottom: 40px;
   left: 0;
   right: 0;
+  bottom: 0; // footer is 40px;
+  z-index: 1;
 
   // padding: 16px 32px;
 
@@ -13,7 +14,9 @@ export const StyledGame = styled.main`
   background-repeat: no-repeat;
   background-position: right top;
   background-size: cover;
-  background-color: rgba(255,0,0,.7);
+  background-color: rgba(0,0,0,.2);
+  // opacity: .95;
+  filter: alpha(opacity=20);
 
   overflow-y: auto;
   overflow-x: hidden;

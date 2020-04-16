@@ -8,7 +8,7 @@ export const StyledSubBar = styled.div`
   width: 100%;
   height: 36px;
 
-  background: rgb(16,16,16);
+  // background: rgba(0,0,0,.33);
   color: #fff;
   font-size: 16px;
   line-height: 20px;
@@ -18,5 +18,13 @@ export const StyledSubBar = styled.div`
 
   display: flex;
   justify-content: center;
-  align-items: center;
+
+
+  .skills-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(0,0,0,.66);
+  }
 `

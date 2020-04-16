@@ -6,19 +6,25 @@ const StyledSkillText = styled.div`
   line-height: 1.25;
   display: flex;
   align-items: center;
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 6px;
+  margin-right: 6px;
+
+  // background: rgba(0,0,0,.45);
+  // border: 1px dashed black;
 
   .skill-text-img {
     height: 28px;
     width: 28px;
+    padding-left: 4px;
   }
   .skill-text {
+    font-size: 18px;
     margin-top: 0;
     margin-bottom: 0;
-    margin-left: 4px;
+    margin-left: 5px;
     padding-top: 6px;
     padding-bottom: 6px;
+    padding-right: 4px;
   }
 `
 

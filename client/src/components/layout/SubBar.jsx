@@ -13,18 +13,20 @@ export const SubBar = ({
   return (
     <StyledSubBar>
       {/* Fishing, Woodcutting, Mining SkillText (Icon & Level) */}
-      <SkillText
-        type="fishing"
-        text={fishingLevel}
-      />
-      <SkillText
-        type="woodcutting"
-        text={woodcuttingLevel}
-      />
-      <SkillText
-        type="mining"
-        text={miningLevel}
-      />
+      <div className="skills-container">
+        <SkillText
+          type="fishing"
+          text={fishingLevel}
+        />
+        <SkillText
+          type="woodcutting"
+          text={woodcuttingLevel}
+        />
+        <SkillText
+          type="mining"
+          text={miningLevel}
+        />
+      </div>
     </StyledSubBar>
   )
 }
