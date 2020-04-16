@@ -6,7 +6,7 @@ import { PageHeader, Footer } from './components/layout'
 import { StyledApp } from './styles/app-layout.style'
 import asyncComponent from './hocs/asyncComponent'
 // import styles
-import './App.css';
+import './styles/App.css';
 
 // Async Route Components (Lazy Loading)
 const AsyncComponent = (uri) => asyncComponent(() => {

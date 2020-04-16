@@ -20,7 +20,7 @@ export const Profile = ({
     <main className="profile-page">
       <StyledProfile className="profile-container">
         <header className="profile-header">
-          <h1>Profile</h1>
+          <h1 className="profile-header-text">{playerName}'s Profile</h1>
         </header>
         <div className="profile-inner">
           <div className="profile-item player">

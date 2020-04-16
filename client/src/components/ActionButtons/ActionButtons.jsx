@@ -71,6 +71,14 @@ export const StyledActionButtons = styled.div`
     padding-left: 5%;
     padding-right: 5%;
   }
+  @media (max-width: 600px) {
+    flex-wrap: wrap;
+
+    .action-btn {
+      margin-bottom: 15px;
+      padding: 1.5%;
+    }
+  }
 `
 
 export const ActionButtons = ({

@@ -14,9 +14,11 @@ export const StyledProfile = styled.div`
 
   .profile-header {
     margin-bottom: 2%;
+    margin-top: 15px;
 
     h1 {
       text-decoration: underline;
+      font-size: 28px;
     }
   }
 

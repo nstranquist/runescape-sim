@@ -200,7 +200,7 @@ export const Game = ({
         
         <div className="game-inner">
           {/* Top Stats Bar */}
-          <section className="top-stats-bar">
+          <section className="top-stats-bar" style={{paddingLeft:"5%",paddingRight:"5%"}}>
             {/* Left Side */}
             <InventoryButton
               numberOfItems={inventory.items.length}
